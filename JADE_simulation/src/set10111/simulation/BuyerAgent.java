@@ -260,18 +260,16 @@ public class BuyerAgent extends Agent {
 						sellers.add(o.getSeller());
 					}
 
-					Offer bestOffer = null;
+					Offer bestOffer = new Offer(new AID("1"), 0);
 					for (Offer offer : offers) {
-						if (bestOffer == null || offer.getPrice() < bestOffer.getPrice()) {
+						if (offer.getPrice() < bestOffer.getPrice()) {
 							bestOffer = offer;
 						}
 						purchaseOrder.setConversationId(book);
 						purchaseOrder.addReceiver(bestOffer.getSeller());
 						myAgent.send(purchaseOrder);
 
-						System.out.println(sellers);
 						sellers.remove(bestOffer.getSeller());
-						System.out.println(sellers);
 						rejectOffer.setContent("refuse");
 						rejectOffer.setConversationId(book);
 
